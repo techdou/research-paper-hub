@@ -1,0 +1,18 @@
+project:
+  title: "Multimodal multilabel remote-sensing research"
+  domain: "multimodal multilabel remote sensing / tree-species classification"
+  target_venue: "IEEE TGRS"
+  primary_writing_family: cs
+  language: en
+preferences:
+  exemplar_first_when_reference_supplied: true
+  max_exemplars_per_write: 3
+  auto_update_check: true
+  auto_apply_updates: false
+  archive_major_transitions: true
+research_context:
+  priorities:
+    - multimodal fusion
+    - multilabel classification
+    - uncertainty-aware evidence fusion
+    - ablation and mechanism analysis

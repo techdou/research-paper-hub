@@ -1,0 +1,12 @@
+project:
+  title: ""
+  domain: ""
+  target_venue: ""
+  primary_writing_family: cs
+  language: en
+preferences:
+  exemplar_first_when_reference_supplied: true
+  max_exemplars_per_write: 3
+  auto_update_check: true
+  auto_apply_updates: false
+  archive_major_transitions: true

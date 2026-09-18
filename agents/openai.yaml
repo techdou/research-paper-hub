@@ -1,0 +1,6 @@
+interface:
+  display_name: "Research Paper Hub"
+  short_description: "Route paper research, experiments, writing, review, archives, and skill updates."
+  default_prompt: "Use Research Paper Hub to route this research task, reuse existing project artifacts, avoid skill conflicts, and archive durable outputs."
+policy:
+  allow_implicit_invocation: true

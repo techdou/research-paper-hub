@@ -1,0 +1,32 @@
+version: 1
+stages:
+  seed:
+    exit_evidence: [research_question_or_scope]
+  discovery:
+    exit_evidence: [paper_candidates]
+  reading:
+    exit_evidence: [reader_artifact]
+  framing:
+    exit_evidence: [opportunity_map_or_idea_decision]
+  experiment_design:
+    exit_evidence: [experiment_plan]
+  experimentation:
+    exit_evidence: [result_artifact]
+  evidence_ready:
+    exit_evidence: [claim_evidence_links]
+  drafting:
+    exit_evidence: [manuscript_revision]
+  internal_review:
+    exit_evidence: [review_report, concern_ledger]
+  revision:
+    exit_evidence: [revised_manuscript, concern_status_updates]
+  submission_ready:
+    exit_evidence: [integrity_report, reference_audit, submission_checklist]
+  submitted:
+    exit_evidence: [submission_record]
+  rebuttal:
+    exit_evidence: [response_letter]
+  accepted:
+    exit_evidence: [acceptance_record]
+  archive:
+    exit_evidence: [final_snapshot]

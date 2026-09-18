@@ -1,0 +1,18 @@
+version: 1
+purpose: Validate host-level implicit invocation boundaries for research-paper-hub.
+positive:
+  - "帮我找一篇最近的多模态多标签遥感 paper，精读后做组会汇报"
+  - "拿这篇 TGRS 论文当写作范文，重构我自己的 Introduction"
+  - "继续上次的论文项目，把实验结果更新到 claim-evidence 链并存档"
+  - "帮我设计 baseline、ablation，然后规划论文实验部分"
+  - "审一下这版稿子，再核对引用和数字是否一致"
+  - "检查 CCFA 和 nature 的科研 skills 有没有更新，但先不要应用"
+negative:
+  - "帮我写一个 Vue 登录页面"
+  - "Python list 和 tuple 有什么区别"
+  - "把这句话翻译成英文"
+  - "今天天气怎么样"
+  - "2+2 等于多少"
+notes:
+  - The description should match the positive set even if shortened.
+  - It should not become a generic writing or coding skill.

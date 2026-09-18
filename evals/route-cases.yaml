@@ -1,0 +1,18 @@
+version: 1
+cases:
+  - name: discovery-read-ppt
+    task: "找一篇最近的多模态多标签遥感论文，精读后做组会汇报"
+    expected_order: [literature_discovery, paper_read, paper_card, group_meeting_ppt]
+  - name: exemplar-then-write
+    task: "拿这篇 TGRS 论文的写法当模板，重构我的 Introduction"
+    expected_order: [paper_read, paper_exemplar, manuscript_write]
+    expected_writer: ccf-paper-writer
+  - name: gap-and-ablation
+    task: "帮我找创新点并设计消融实验"
+    expected_order: [opportunity_gap, experiment_design]
+  - name: nature-write
+    task: "帮我写论文 Introduction"
+    venue: "Nature Communications"
+    writing_family: nature
+    expected_order: [manuscript_write]
+    expected_writer: nature-writing

@@ -1,0 +1,14 @@
+version: 2
+check_interval_hours: 24
+apply_policy: explicit_only
+cache_env: RESEARCH_PAPER_HUB_CACHE
+cache_default: ~/.cache/research-paper-hub
+project_vendor: .research/vendor
+project_history: .research/vendor-history
+project_lock: .research/upstream/lock.json
+safety:
+  preserve_previous_copy: true
+  never_edit_vendor_in_place: true
+  preserve_upstream_license: true
+  record_commit_and_tree_sha: true
+  no_auto_apply: true

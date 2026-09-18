@@ -1,0 +1,154 @@
+version: 2
+families:
+  cs:
+    venues: [AAAI, CVPR, ICCV, ECCV, NeurIPS, ICML, ICLR, ACM, IEEE, TGRS, GRSL, JSTARS]
+    writer: ccf-paper-writer
+    reviewer: ccf-paper-reviewer
+    rebuttal: ccf-rebuttal-writer
+    writer_preflight: ccf-humanization
+  nature:
+    venues: [Nature, Nature Communications, Nature Machine Intelligence, Scientific Reports]
+    writer: nature-writing
+    reviewer: nature-reviewer
+    rebuttal: nature-response
+    writer_preflight: null
+
+collision_families:
+  writers: [ccf-paper-writer, nature-writing]
+  reviewers: [ccf-paper-reviewer, nature-reviewer]
+  rebuttals: [ccf-rebuttal-writer, nature-response]
+  method_vs_results_figure: [ccf-visual-composer, nature-figure]
+
+intents:
+  skill_sync:
+    priority: 100
+    triggers: ["skill 更新", "skills 更新", "skill有没有更新", "skills 有没有更新", "检查skill更新", "检查 skills 更新", "同步skill", "同步 skills", "更新skill", "更新 skills", "sync skills", "skill update"]
+    owner: research-paper-hub
+    outputs: [update_report]
+  project_archive:
+    priority: 92
+    triggers: ["存档", "归档", "snapshot", "项目快照", "archive project"]
+    owner: research-paper-hub
+    outputs: [snapshot]
+  literature_discovery:
+    priority: 40
+    triggers: ["找论文", "找一篇", "找一篇论文", "找一篇paper", "检索论文", "相关论文", "最近论文", "最新论文", "search paper", "literature search", "find papers"]
+    owner: nature-academic-search
+    outputs: [paper_candidates]
+  literature_monitor:
+    priority: 50
+    triggers: ["每日论文", "每周论文", "持续监控", "文献监控", "literature monitor", "定期检索"]
+    owner: nature-literature-pipeline
+    outputs: [literature_feed]
+  opportunity_gap:
+    priority: 70
+    triggers: ["research gap", "研究空白", "创新点", "closest work", "差异化", "机会图", "prior art"]
+    owner: ccf-literature-searcher
+    outputs: [opportunity_map]
+  paper_download:
+    priority: 55
+    triggers: ["下载论文", "获取pdf", "download paper", "download pdf"]
+    owner: nature-downloader
+    outputs: [paper_source]
+  paper_read:
+    priority: 60
+    triggers: ["精读", "读论文", "讲一下这篇", "全文阅读", "深入学习", "deep read", "paper reader"]
+    owner: nature-reader
+    outputs: [reader_artifact, source_map]
+  paper_card:
+    priority: 65
+    triggers: ["论文卡片", "精读卡", "深度阅读卡", "paper card"]
+    owner: nature-paper-card
+    requires_any: [reader_artifact]
+    prerequisite_intent: paper_read
+    outputs: [paper_card]
+  paper_exemplar:
+    priority: 95
+    triggers: ["范文", "写作模板", "exemplar", "structure transfer", "写作范式", "仿写结构", "转写稿件", "学习写法", "按这篇写", "拿这篇当模板", "当模板", "论文的写法", "写法当模板"]
+    owner: ccf-paper-to-exemplar
+    requires_any: [reader_artifact]
+    prerequisite_intent: paper_read
+    outputs: [exemplar_card, structure_map]
+    blocked: [ccf-paper-writer, nature-writing]
+  idea_review:
+    priority: 70
+    triggers: ["idea review", "评估idea", "评估想法", "创新性评审", "这个想法怎么样"]
+    owner: ccf-idea-reviewer
+    outputs: [idea_decision]
+  idea_optimize:
+    priority: 72
+    triggers: ["优化idea", "优化想法", "改进idea", "idea optimize"]
+    owner: ccf-idea-optimizer
+    outputs: [optimized_idea]
+  experiment_design:
+    priority: 80
+    triggers: ["实验设计", "消融", "ablation", "baseline", "对比实验", "评测方案", "experiment design"]
+    owner: ccf-experiment-designer
+    audit: [nature-statistics]
+    outputs: [experiment_plan, claim_evidence_plan]
+  experiment_log:
+    priority: 55
+    triggers: ["实验日志", "experiment log", "记录实验"]
+    owner: nature-experiment-log
+    outputs: [experiment_log]
+  reference_verify:
+    priority: 75
+    triggers: ["参考文献核对", "doi核对", "引用信息核对", "reference verify", "bibtex核对", "reference metadata"]
+    owner: nature-ref-verifier
+    outputs: [reference_audit]
+  integrity_audit:
+    priority: 78
+    triggers: ["一致性核对", "claim evidence", "claim-evidence", "数字核对", "完整性审计", "integrity audit", "证据链", "claim support"]
+    owner: ccf-integrity-auditor
+    audit: [nature-ref-verifier]
+    outputs: [integrity_report]
+  method_figure:
+    priority: 70
+    triggers: ["方法图", "框架图", "architecture figure", "method figure", "模型图"]
+    owner: ccf-visual-composer
+    outputs: [method_figure]
+    blocked: [nature-figure]
+  results_figure:
+    priority: 70
+    triggers: ["结果图", "科研可视化", "multi-panel", "多面板", "results figure", "统计图"]
+    owner: nature-figure
+    audit: [nature-statistics]
+    outputs: [results_figure]
+    blocked: [ccf-visual-composer]
+  group_meeting_ppt:
+    priority: 90
+    triggers: ["讨论班", "组会", "汇报ppt", "paper2ppt", "presentation", "slides", "组会汇报"]
+    owner: nature-paper2ppt
+    requires_any: [paper_card]
+    prerequisite_intent: paper_card
+    outputs: [pptx]
+  manuscript_write:
+    priority: 85
+    triggers: ["写论文", "写introduction", "写method", "写abstract", "manuscript", "论文撰写", "改稿", "重写论文", "重构 introduction", "重构 method", "重构我的", "重构"]
+    dynamic_owner: writer
+    outputs: [manuscript_revision]
+    blocked_family: writers
+  manuscript_review:
+    priority: 82
+    triggers: ["审稿", "review paper", "reviewer", "预审", "论文评审", "审一下稿"]
+    dynamic_owner: reviewer
+    audit: [ccf-integrity-auditor, nature-ref-verifier]
+    outputs: [review_report, concern_ledger]
+    blocked_family: reviewers
+  response_rebuttal:
+    priority: 88
+    triggers: ["rebuttal", "回复审稿", "response letter", "返修回复", "审稿意见回复"]
+    dynamic_owner: rebuttal
+    outputs: [response_letter]
+    blocked_family: rebuttals
+  language_polish:
+    priority: 58
+    triggers: ["润色", "polish", "学术英语", "语言优化", "英文润色"]
+    owner: nature-polishing
+    outputs: [polished_revision]
+  submission_check:
+    priority: 77
+    triggers: ["投稿检查", "submission check", "投稿前检查", "camera ready check"]
+    owner: ccf-submission-checker
+    audit: [ccf-integrity-auditor, nature-ref-verifier]
+    outputs: [submission_checklist]

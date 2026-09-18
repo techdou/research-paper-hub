@@ -1,0 +1,78 @@
+version: 2
+sources:
+  ccfa:
+    repo: https://github.com/mikubaka88/CCFA-Skills.git
+    branch: main
+    license: MIT
+    path_prefix: ""
+    support_dependencies:
+      - ccf-common
+    recommended:
+      - ccf-literature-searcher
+      - ccf-literature-monitor
+      - ccf-idea-reviewer
+      - ccf-idea-optimizer
+      - ccf-experiment-designer
+      - ccf-paper-to-exemplar
+      - ccf-paper-writer
+      - ccf-paper-reviewer
+      - ccf-integrity-auditor
+      - ccf-visual-composer
+      - ccf-humanization
+      - ccf-rebuttal-writer
+      - ccf-submission-checker
+    capabilities:
+      ccf-common: {role: support}
+      ccf-latex-templates: {role: support_resource}
+      ccf-literature-searcher: {role: literature_reasoning}
+      ccf-literature-monitor: {role: literature_monitor}
+      ccf-idea-reviewer: {role: idea_review}
+      ccf-idea-optimizer: {role: idea_optimize}
+      ccf-experiment-designer: {role: experiment_design, dependencies: [ccf-humanization, ccf-paper-writer]}
+      ccf-paper-to-exemplar: {role: paper_exemplar}
+      ccf-paper-writer: {role: manuscript_write, dependencies: [ccf-humanization, ccf-latex-templates]}
+      ccf-paper-reviewer: {role: manuscript_review, dependencies: [ccf-paper-writer]}
+      ccf-integrity-auditor: {role: integrity_audit}
+      ccf-visual-composer: {role: method_figure, dependencies: [ccf-humanization]}
+      ccf-humanization: {role: humanization}
+      ccf-rebuttal-writer: {role: rebuttal, dependencies: [ccf-paper-writer]}
+      ccf-submission-checker: {role: submission_check, dependencies: [ccf-humanization, ccf-paper-writer, ccf-latex-templates]}
+  nature:
+    repo: https://github.com/Yuan1z0825/nature-skills.git
+    branch: main
+    license: Apache-2.0
+    path_prefix: skills
+    support_dependencies:
+      - nature-shared
+    recommended:
+      - nature-academic-search
+      - nature-literature-pipeline
+      - nature-downloader
+      - nature-reader
+      - nature-paper-card
+      - nature-statistics
+      - nature-experiment-log
+      - nature-ref-verifier
+      - nature-figure
+      - nature-polishing
+      - nature-writing
+      - nature-reviewer
+      - nature-response
+      - nature-paper2ppt
+      - nature-shared
+    capabilities:
+      nature-shared: {role: support}
+      nature-academic-search: {role: literature_discovery}
+      nature-literature-pipeline: {role: literature_monitor}
+      nature-downloader: {role: paper_download}
+      nature-reader: {role: paper_read}
+      nature-paper-card: {role: paper_card}
+      nature-statistics: {role: statistics}
+      nature-experiment-log: {role: experiment_log}
+      nature-ref-verifier: {role: reference_verify}
+      nature-figure: {role: results_figure}
+      nature-polishing: {role: language_polish}
+      nature-writing: {role: manuscript_write}
+      nature-reviewer: {role: manuscript_review}
+      nature-response: {role: rebuttal}
+      nature-paper2ppt: {role: group_meeting_ppt}
