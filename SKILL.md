@@ -23,7 +23,7 @@ Router and orchestrator logic are internal modules, not separate discoverable sk
 
 1. **Respect explicit selection.** If the user explicitly names an upstream skill, use that skill as the owner unless doing so is impossible or unsafe. Record the choice when a project is active.
 2. **Detect project context.** If `<project>/.research/state.json` exists, reuse it. For a new long-running paper project, initialize `.research/` with `scripts/hub.py init <project>` when shell execution is available.
-3. **Classify the request.** Separate single-step tasks from composite tasks. A turn such as “找一篇最近的 paper，精读后做组会汇报” is a sequence, not one ambiguous intent.
+3. **Classify the request.** Separate single-step tasks from composite tasks. A turn such as “找一篇最近的 paper，精读后做组会汇报” is a sequence, not one ambiguous intent. When the user only asks to deeply read or dissect a single named paper/PDF without a multi-step project pipeline, delegate that step directly to `paper-reading` as the owner.
 4. **Route each step.** Apply `references/ROUTER.md`. A step has exactly one owner. Supporting capabilities may supply prerequisite artifacts or audits but must not produce the same primary artifact.
 5. **Reuse before recompute.** Prefer existing Reader/source-map, Paper Card, Exemplar, experiment, figure, and manuscript artifacts when their inputs and capability versions still match.
 6. **Load the owner playbook progressively.** If synchronized upstream playbooks exist under `.research/vendor/<source>/<skill>/SKILL.md`, read the selected owner playbook and only the prerequisite/audit playbooks required for that step. Do not load every installed playbook.
