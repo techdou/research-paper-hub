@@ -2,6 +2,8 @@
 
 这是一个面向长期科研与论文写作的**单入口 Agent Skill**。它路由两个上游技能族——CCFA-Skills（CS/CCF 系期刊会议）与 nature-skills（Nature 系期刊）——并保证任何两个技能永远不会争抢同一个产物。
 
+当前版本：**2.1.0**（[变更记录](CHANGELOG.md)）。本版新增科研编码与基线复现路由；中文学位论文和开题仍交给对应的本地技能。
+
 核心设计：
 
 ```text
@@ -129,8 +131,8 @@ research-paper-hub/
 
 | 技能族 | 上游仓库 | 许可证 | 覆盖能力 |
 |---|---|---|---|
-| CCFA-Skills | [mikubaka88/CCFA-Skills](https://github.com/mikubaka88/CCFA-Skills) | MIT | 文献检索/监控、idea 评审、实验设计、写作、审稿、人性化润色、rebuttal、完整性审计、科研图、投稿检查 |
-| nature-skills | [Yuan1z0825/nature-skills](https://github.com/Yuan1z0825/nature-skills) | Apache-2.0 | 文献发现、精读、论文卡片、统计、引用核验、结果图、语言润色、写作、审稿、返修、组会 PPT |
+| CCFA-Skills | [mikubaka88/CCFA-Skills](https://github.com/mikubaka88/CCFA-Skills) | MIT | 文献检索/监控、idea 评审、实验设计、科研编码与基线复现、写作、审稿、人性化润色、rebuttal、完整性审计、科研图、投稿检查 |
+| nature-skills | [Yuan1z0825/nature-skills](https://github.com/Yuan1z0825/nature-skills) | Apache-2.0 | 文献发现、精读、论文卡片、统计、引用核验、结果图、语言润色、写作、审稿、返修、组会 PPT，及可选的 `nature-data` / `nature-citation` |
 
 ## 测试
 

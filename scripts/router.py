@@ -68,10 +68,10 @@ def _needs_exemplar_before_write(task: str, matches: list[Match]) -> bool:
 def _order_intents(intents: list[str]) -> list[str]:
     preferred = [
         "skill_sync",
-        "literature_discovery", "paper_download", "paper_read", "paper_card", "paper_exemplar",
-        "opportunity_gap", "idea_review", "idea_optimize", "experiment_design", "experiment_log",
+        "literature_discovery", "cns_citation", "paper_download", "paper_read", "paper_card", "paper_exemplar",
+        "opportunity_gap", "idea_review", "idea_optimize", "experiment_design", "research_engineering", "experiment_log",
         "method_figure", "results_figure", "manuscript_write", "manuscript_review",
-        "integrity_audit", "reference_verify", "language_polish", "submission_check",
+        "integrity_audit", "reference_verify", "data_availability", "language_polish", "submission_check",
         "response_rebuttal", "group_meeting_ppt", "project_archive", "literature_monitor",
     ]
     rank = {name: i for i, name in enumerate(preferred)}
@@ -129,6 +129,12 @@ def route_task(task: str, research: Path) -> dict[str, Any]:
     if "group_meeting_ppt" in selected:
         selected = [x for x in selected if x not in {"manuscript_write"}]
 
+    # Pure baseline reproduction/debugging should not pull experiment_design solely from the word "baseline".
+    if "research_engineering" in selected and "experiment_design" in selected:
+        exp_match = next((m for m in matches if m.intent == "experiment_design"), None)
+        if exp_match and exp_match.signals == ["baseline"]:
+            selected.remove("experiment_design")
+
     ordered = _order_intents(selected)
     steps: list[dict[str, Any]] = []
     inserted: set[str] = set()
@@ -144,8 +150,12 @@ def route_task(task: str, research: Path) -> dict[str, Any]:
             # Account for artifact produced by inserted prerequisite within this plan.
             existing.update(routing.get("intents", {}).get(prerequisite, {}).get("outputs", []))
 
-        owner = _owner(intent, spec, family, routing)
-        source = "internal" if owner == "research-paper-hub" else (source_for_skill(owner, caps) if owner else None)
+        if len(ordered) == 1 and spec.get("standalone_owner") and reason is None:
+            owner = spec.get("standalone_owner")
+            source = "local"
+        else:
+            owner = _owner(intent, spec, family, routing)
+            source = "internal" if owner == "research-paper-hub" else (source_for_skill(owner, caps) if owner else None)
         audit_skills = list(spec.get("audit", []))
         preflight_skills: list[str] = []
         if intent == "manuscript_write":

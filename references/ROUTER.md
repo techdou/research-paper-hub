@@ -56,6 +56,7 @@ Do not route by generic words such as “paper” alone when a more specific req
 ### Literature
 
 - discovery / multi-source retrieval / citation lookup: `nature-academic-search`
+- optional Nature/CNS-scoped supporting citations: `nature-citation`
 - recurring feed: `nature-literature-pipeline`
 - closest-work map / gap / novelty / benchmark opportunity reasoning: `ccf-literature-searcher`
 - lawful acquisition: `nature-downloader`
@@ -68,6 +69,7 @@ Do not route by generic words such as “paper” alone when a more specific req
 - idea gate/reviewer: `ccf-idea-reviewer`
 - idea refinement: `ccf-idea-optimizer`
 - experiment package / baseline / ablation logic: `ccf-experiment-designer`
+- research code / baseline reproduction / training diagnosis: `ccf-research-engineer`
 - statistical design/check: `nature-statistics`
 - experiment logging: `nature-experiment-log`
 
@@ -84,6 +86,7 @@ Never run two primary writers on the same revision pass.
 
 - venue-aware scientific manuscript review: `ccf-paper-reviewer` or `nature-reviewer`, one only
 - bibliographic fields / DOI / reference-file integrity: `nature-ref-verifier`
+- optional Data Availability & FAIR metadata check: `nature-data`
 - claim support / numeric consistency / citation-context / manuscript-result alignment: `ccf-integrity-auditor`
 
 A formal review may be followed by both audits because they inspect different failure classes.
@@ -125,3 +128,10 @@ Examples:
 - while `ccf-paper-to-exemplar` owns `exemplar_card`, both writers are blocked;
 - while `ccf-paper-writer` owns a CS manuscript revision, `nature-writing` is blocked as primary but `nature-polishing` may run later;
 - while `nature-ref-verifier` owns reference metadata audit, `ccf-integrity-auditor` is not a substitute, but may run as a separate claim-integrity step.
+
+## Excluded upstream skills & local boundaries
+
+To prevent host/tool collisions and duplicated work, the following upstream additions are deliberately **excluded** from automatic hub routing:
+
+- From CCFA-Skills: `ccf-pipeline-orchestrator` (conflicts with hub routing), `ccf-project-scaffolder` (overlaps `hub.py init`), and `ccf-skill-forger` (meta-skill outside paper research).
+- From nature-skills (covered by stronger local skills or outside CS scope): `nature-paper2word` (`chinese-professional-docx` + `omml-formula-skill`), `nature-image2ppt` (`ppt-studio` + `html-to-pptx`), `nature-proposal-writer` (`nenu-computer-tech-proposal` + `dou-tone`), `nature-paper-xray` (`paper-reading`), and low-frequency domain tools (`nature-paper-trans`, `nature-paper-to-patent`, `nature-social-science`).

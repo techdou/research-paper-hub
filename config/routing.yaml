@@ -1,7 +1,7 @@
 version: 2
 families:
   cs:
-    venues: [AAAI, CVPR, ICCV, ECCV, NeurIPS, ICML, ICLR, ACM, IEEE, TGRS, GRSL, JSTARS]
+    venues: [AAAI, ACL, EMNLP, NAACL, CVPR, ICCV, ECCV, NeurIPS, ICML, ICLR, IJCAI, KDD, SIGKDD, SIGIR, WWW, ACM, ACM-MM, CHI, IEEE, TGRS, GRSL, JSTARS, MICCAI]
     writer: ccf-paper-writer
     reviewer: ccf-paper-reviewer
     rebuttal: ccf-rebuttal-writer
@@ -54,6 +54,7 @@ intents:
     priority: 60
     triggers: ["精读", "读论文", "讲一下这篇", "全文阅读", "深入学习", "deep read", "paper reader"]
     owner: nature-reader
+    standalone_owner: paper-reading
     outputs: [reader_artifact, source_map]
   paper_card:
     priority: 65
@@ -86,11 +87,26 @@ intents:
     owner: ccf-experiment-designer
     audit: [nature-statistics]
     outputs: [experiment_plan, claim_evidence_plan]
+  research_engineering:
+    priority: 79
+    triggers: ["科研编码", "论文复现", "复现基线", "基线复现", "代码复现", "复现", "baseline复现", "baseline 跑不通", "baseline跑不通", "跑不通", "codebase选型", "模型实现", "实现模型", "模型模块", "训练调试", "调试训练", "训练排障", "显存报错", "显存优化", "吞吐优化", "oom", "实现方法代码", "research code", "reproduce baseline"]
+    owner: ccf-research-engineer
+    outputs: [code_artifact, reproduction_report]
   experiment_log:
     priority: 55
     triggers: ["实验日志", "experiment log", "记录实验"]
     owner: nature-experiment-log
     outputs: [experiment_log]
+  cns_citation:
+    priority: 64
+    triggers: ["cns citation", "nature citation", "nature支撑文献", "cns支撑文献", "zotero rdf"]
+    owner: nature-citation
+    outputs: [cns_citations]
+  data_availability:
+    priority: 62
+    triggers: ["data availability", "数据可用性", "fair metadata", "数据仓储方案"]
+    owner: nature-data
+    outputs: [data_availability_statement]
   reference_verify:
     priority: 75
     triggers: ["参考文献核对", "doi核对", "引用信息核对", "reference verify", "bibtex核对", "reference metadata"]

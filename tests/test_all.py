@@ -50,6 +50,56 @@ def test_router_and_reuse(tmp: Path):
     assert _intents(plan) == ["manuscript_write"]
     assert plan["steps"][0]["primary"]["skill"] == "nature-writing"
 
+    plan = route_task("先设计消融实验，再复现基线代码并做训练排障", research)
+    assert _intents(plan) == ["experiment_design", "research_engineering"], plan
+    assert plan["steps"][1]["primary"]["skill"] == "ccf-research-engineer"
+    repro_bundle = {item["skill"] for item in plan["steps"][1]["playbook_bundle"]}
+    assert {"ccf-common", "ccf-humanization", "ccf-research-engineer"}.issubset(repro_bundle), repro_bundle
+
+    for q in (
+        "baseline 跑不通，帮我排查一下训练显存报错",
+        "复现这篇论文的 baseline 代码",
+        "帮我实现这个模型模块并调试训练",
+    ):
+        p_eng = route_task(q, research)
+        assert _intents(p_eng) == ["research_engineering"], (q, p_eng)
+        assert p_eng["steps"][0]["primary"]["skill"] == "ccf-research-engineer"
+
+    p_exp = route_task("帮我设计 baseline 对比实验", research)
+    assert _intents(p_exp) == ["experiment_design"], p_exp
+
+    plan = route_task("准备论文的 Data Availability 和 FAIR metadata", research)
+    assert _intents(plan) == ["data_availability"], plan
+    assert plan["steps"][0]["primary"]["skill"] == "nature-data"
+
+    plan = route_task("检索 CNS citation 导出 Zotero RDF", research)
+    assert _intents(plan) == ["cns_citation"], plan
+    assert plan["steps"][0]["primary"]["skill"] == "nature-citation"
+
+    set_state(research, venue="Nature Machine Intelligence")
+    plan = route_task("帮我写论文 Method", research)
+    assert plan["venue_family"] == "nature", plan
+    assert plan["steps"][0]["primary"]["skill"] == "nature-writing", plan
+
+    plan = route_task("精读这篇论文 demo.pdf，讲一下核心方法和局限", research)
+    assert _intents(plan) == ["paper_read"], plan
+    assert plan["steps"][0]["primary"]["skill"] == "paper-reading", plan
+
+    set_state(research, venue="Nature Communications", writing_family="nature")
+    set_state(research, venue="ACL 2027")
+    plan = route_task("帮我写论文 Method", research)
+    assert plan["venue_family"] == "cs", plan
+    assert _intents(plan) == ["manuscript_write"], plan
+    assert plan["steps"][0]["primary"]["skill"] == "ccf-paper-writer"
+
+    caps = load_yaml(ROOT / "config" / "capabilities.yaml")
+    ccfa_rec = caps["sources"]["ccfa"]["recommended"]
+    nature_rec = caps["sources"]["nature"]["recommended"]
+    nature_caps = caps["sources"]["nature"]["capabilities"]
+    assert "ccf-research-engineer" in ccfa_rec
+    assert "nature-data" in nature_caps and "nature-data" not in nature_rec
+    assert "nature-citation" in nature_caps and "nature-citation" not in nature_rec
+
     plan = route_task("检查 CCFA 和 nature 的科研 skills 有没有更新，但先不要应用", research)
     assert _intents(plan) == ["skill_sync"], plan
     assert plan["steps"][0]["primary"]["source"] == "internal"

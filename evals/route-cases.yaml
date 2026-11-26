@@ -16,3 +16,13 @@ cases:
     writing_family: nature
     expected_order: [manuscript_write]
     expected_writer: nature-writing
+  - name: design-and-reproduce
+    task: "先设计消融实验，再复现基线代码"
+    expected_order: [experiment_design, research_engineering]
+    expected_owners: [ccf-experiment-designer, ccf-research-engineer]
+  - name: acl-write
+    task: "帮我写论文 Method"
+    venue: "ACL 2027"
+    writing_family: cs
+    expected_order: [manuscript_write]
+    expected_writer: ccf-paper-writer

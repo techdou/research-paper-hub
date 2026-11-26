@@ -2,6 +2,8 @@
 
 A single-front-door [Agent Skill](https://agentskills.io/specification) for persistent paper-research workflows. It routes requests across two upstream skill families — **CCFA-Skills** (CS/CCF venues) and **nature-skills** (Nature-family journals) — while guaranteeing that no two skills ever compete for the same artifact.
 
+Release: **2.1.0** ([changelog](CHANGELOG.md)). This release adds research-code and baseline-reproduction routing and keeps Chinese thesis and proposal workflows in their dedicated local skills.
+
 ## Why a hub
 
 Research requests are usually composite: *"find a recent paper, read it closely, then report at group meeting"* is a sequence of steps, not one intent. Running a standalone skill per step invites conflicts — two writers, two searchers, two figure skills all claiming the same output. This hub solves that with three rules:
@@ -120,8 +122,8 @@ This skill routes to two upstream skill families, synchronized into user project
 
 | Family | Upstream | License | Coverage |
 |---|---|---|---|
-| CCFA-Skills | [mikubaka88/CCFA-Skills](https://github.com/mikubaka88/CCFA-Skills) | MIT | Literature search/monitor, idea review, experiment design, writing, review, humanization, rebuttal, integrity audit, figures, submission checks |
-| nature-skills | [Yuan1z0825/nature-skills](https://github.com/Yuan1z0825/nature-skills) | Apache-2.0 | Literature discovery, reading, paper cards, statistics, reference verification, figures, polishing, writing, review, response, group-meeting PPT |
+| CCFA-Skills | [mikubaka88/CCFA-Skills](https://github.com/mikubaka88/CCFA-Skills) | MIT | Literature search/monitor, idea review, experiment design, research engineering & baseline reproduction, writing, review, humanization, rebuttal, integrity audit, figures, submission checks |
+| nature-skills | [Yuan1z0825/nature-skills](https://github.com/Yuan1z0825/nature-skills) | Apache-2.0 | Literature discovery, reading, paper cards, statistics, reference verification, figures, polishing, writing, review, response, group-meeting PPT, plus optional `nature-data` & `nature-citation` |
 
 This repository does **not** vendor upstream code. Upstream skills are fetched into your project at sync time and recorded with their licenses preserved.
 

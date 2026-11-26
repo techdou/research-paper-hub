@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import os
 import re
 import shutil
@@ -161,9 +162,17 @@ def source_for_skill(skill: str, capabilities: dict[str, Any]) -> str | None:
 def detect_venue_family(target: str | None, profile: dict[str, Any], routing: dict[str, Any]) -> str:
     if target:
         lower = target.lower()
+        candidates: list[tuple[int, str]] = []
         for family, spec in routing.get("families", {}).items():
-            if any(str(v).lower() in lower for v in spec.get("venues", [])):
-                return family
+            for v in spec.get("venues", []):
+                v_lower = str(v).lower().strip()
+                if not v_lower:
+                    continue
+                if re.search(rf"(?<![a-z0-9]){re.escape(v_lower)}(?![a-z0-9])", lower):
+                    candidates.append((len(v_lower), family))
+        if candidates:
+            candidates.sort(key=lambda item: item[0], reverse=True)
+            return candidates[0][1]
     project = profile.get("project", {})
     return project.get("primary_writing_family") or "cs"
 

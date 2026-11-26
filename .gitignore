@@ -4,6 +4,9 @@
 .env.*
 *.key
 *.pem
+*secret*.json
+*token*.json
+*cookies*.json
 
 # ===== 内部文档与开发状态（不进公开仓库）=====
 BUILD_REPORT.md
@@ -49,6 +52,7 @@ _htpasswd
 .codex/
 .gemini/
 .zcode/
+.pi/
 .windsurf/
 .trae/
 .roo/
@@ -95,3 +99,9 @@ docs/
 *-private.md
 NOTES.md
 PLAN*.md
+devlog/
+*.bak
+*.bak-*
+*.log
+archive/
+state/

@@ -3,6 +3,7 @@
 | Intent | Primary owner | Notes |
 |---|---|---|
 | literature discovery | nature-academic-search | retrieval / citation lookup |
+| Nature/CNS supporting citations | nature-citation | optional; CNS-scoped citations |
 | recurring literature feed | nature-literature-pipeline | monitoring only |
 | research gap / closest work | ccf-literature-searcher | scientific synthesis |
 | lawful download | nature-downloader | acquisition |
@@ -12,6 +13,7 @@
 | idea review | ccf-idea-reviewer | gate |
 | idea optimization | ccf-idea-optimizer | refinement |
 | experiment design | ccf-experiment-designer | claim→evidence package |
+| research engineering | ccf-research-engineer | code, baseline repro, training debug |
 | statistical design/check | nature-statistics | support/audit |
 | experiment log | nature-experiment-log | durable log |
 | CS/IEEE manuscript draft | ccf-paper-writer | one writer |
@@ -20,6 +22,7 @@
 | Nature-family review | nature-reviewer | one reviewer |
 | claim/numeric/context audit | ccf-integrity-auditor | scientific integrity |
 | reference metadata audit | nature-ref-verifier | bibliographic integrity |
+| data availability / FAIR | nature-data | optional; data statement check |
 | method/story figure | ccf-visual-composer | architecture/story |
 | result/statistics figure | nature-figure | evidence panel |
 | group-meeting PPT | nature-paper2ppt | presentation |

@@ -13,6 +13,7 @@ sources:
       - ccf-idea-reviewer
       - ccf-idea-optimizer
       - ccf-experiment-designer
+      - ccf-research-engineer
       - ccf-paper-to-exemplar
       - ccf-paper-writer
       - ccf-paper-reviewer
@@ -29,6 +30,7 @@ sources:
       ccf-idea-reviewer: {role: idea_review}
       ccf-idea-optimizer: {role: idea_optimize}
       ccf-experiment-designer: {role: experiment_design, dependencies: [ccf-humanization, ccf-paper-writer]}
+      ccf-research-engineer: {role: research_engineering, dependencies: [ccf-humanization]}
       ccf-paper-to-exemplar: {role: paper_exemplar}
       ccf-paper-writer: {role: manuscript_write, dependencies: [ccf-humanization, ccf-latex-templates]}
       ccf-paper-reviewer: {role: manuscript_review, dependencies: [ccf-paper-writer]}
@@ -63,6 +65,8 @@ sources:
     capabilities:
       nature-shared: {role: support}
       nature-academic-search: {role: literature_discovery}
+      nature-citation: {role: cns_citation}
+      nature-data: {role: data_availability}
       nature-literature-pipeline: {role: literature_monitor}
       nature-downloader: {role: paper_download}
       nature-reader: {role: paper_read}

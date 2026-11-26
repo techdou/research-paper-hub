@@ -1,6 +1,6 @@
 ---
 name: research-paper-hub
-description: Route and coordinate paper-research workflows across CCFA-Skills and nature-skills. Use for 论文检索/精读/范文提取、research gap/idea、实验设计、论文撰写/改稿/审稿/rebuttal、引用与证据核验、科研图/PPT，或继续/归档一个长期 paper 项目。 This is the single front door for multi-skill research work; do not use for unrelated coding, generic prose, or simple factual questions that do not need a research workflow.
+description: Route and coordinate paper-research workflows across CCFA-Skills and nature-skills. Use for 论文检索/精读/范文提取、research gap/idea、实验设计与代码复现、论文撰写/改稿/审稿/rebuttal、引用与证据核验、科研图/PPT，或继续/归档一个长期 paper 项目。 This is the single front door for multi-skill research work; do not use for unrelated coding, generic prose, or simple factual questions that do not need a research workflow.
 license: MIT
 compatibility: Python 3.11+ recommended; git is required only for upstream skill synchronization.
 ---
@@ -37,11 +37,11 @@ When the user supplies or names a strong reference paper as a writing model, tre
 
 Use exactly one primary writer for a manuscript pass:
 
-- CS / CCF / AAAI / CVPR / NeurIPS / ACM / IEEE / TGRS-style targets → `ccf-paper-writer`.
+- CS / CCF / AAAI / ACL / CVPR / ICML / NeurIPS / ACM / IEEE / TGRS-style targets → `ccf-paper-writer`.
 - Nature / Nature-family targets → `nature-writing`.
 - Unknown target → use the project's configured writing family; if absent, use the research domain and intended venue to make a best-effort choice and record it.
 
-A polishing or humanization capability may run only after the primary drafting pass.
+A polishing or humanization capability may run only after the primary drafting pass. Keep Chinese thesis/proposal/prose workflows in local skills (`nenu-computer-tech-proposal` and `dou-tone`), and reserve `research-paper-hub` for English and venue-targeted paper pipelines.
 
 ## Upstream synchronization
 
